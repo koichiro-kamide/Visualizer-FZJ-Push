@@ -1,9 +1,11 @@
 import os
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 from fairmotion.data import bvh
 import imageio.v2 as imageio
 from io import BytesIO
 from PIL import Image
+
 
 def load_skl():
     root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +43,7 @@ def visualize_motion(motion, sub_name="X05", out_name="motion.gif"):
     images = []
     os.makedirs('visual_results', exist_ok=True)
 
-    for f_idx, frame in enumerate(motion):
+    for f_idx, frame in enumerate(tqdm(motion)):
         fig = plt.figure(figsize=(5, 5))
         ax = fig.add_subplot(111, projection='3d')
 
@@ -66,7 +68,7 @@ def visualize_motion(motion, sub_name="X05", out_name="motion.gif"):
         ax.set_ylim(mid[1] - max_range, mid[1] + max_range)
         ax.set_zlim(mid[2] - max_range, mid[2] + max_range)
 
-        ax.view_init(elev=16, azim=-10)
+        ax.view_init(elev=16, azim=-35)
         ax.set_axis_off()
         ax.set_title(f"{sub_name} - frame {f_idx}")
 
@@ -79,14 +81,14 @@ def visualize_motion(motion, sub_name="X05", out_name="motion.gif"):
 
     # --- GIFとして保存 ---
     out_path = os.path.join("visual_results", out_name)
-    imageio.mimsave(out_path, images, fps=15)
+    imageio.mimsave(out_path, images, fps=50)
     print(f"✅ GIF saved to: {out_path}")
 
 
 if __name__ == '__main__':
     motion_set = load_skl()
 
-    sub_name = 'X05'
+    sub_name = 'X07'
     sample_idx = 0
     motion = motion_set[sub_name][sample_idx]
     visualize_motion(motion, sub_name=sub_name, out_name=f"{sub_name}_sample{sample_idx}.gif")

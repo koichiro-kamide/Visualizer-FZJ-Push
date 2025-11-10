@@ -62,7 +62,6 @@ def visualize_frame(frame):
         19,
         20
     ]
-    print(len(parents))
 
     # 親子関係に基づいてエッジを描く
     for child_idx, parent_idx in enumerate(parents):
@@ -90,7 +89,8 @@ def visualize_frame(frame):
 
     os.makedirs('visual_results', exist_ok=True)
     plt.savefig(os.path.join('visual_results', f'elev-{elev}-azim-{azim}.png'), dpi=300)
-    plt.show()
+    # plt.show()
+
 
 if __name__=='__main__':
     motion_set = load_skl()
