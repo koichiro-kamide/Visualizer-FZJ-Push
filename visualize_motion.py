@@ -87,11 +87,14 @@ def visualize_motion(motion, sub_name="X05", out_name="motion.gif"):
 
 if __name__ == '__main__':
     motion_set = load_skl()
+
+    #=== 1サンプルずつ可視化したい場合 ===
     # sub_name = 'X08'
     # sample_idx = 11
     # motion = motion_set[sub_name][sample_idx]
     # visualize_motion(motion, sub_name=sub_name, out_name=f"{sub_name}_sample{sample_idx}.gif")
 
+    #=== 全サンプルをまとめて可視化したい場合 ===
     sub_names = ['X05', 'X07', 'X08', 'X09']
     for sub_name in sub_names:
         for sample_idx, motion in enumerate(motion_set[sub_name]):
