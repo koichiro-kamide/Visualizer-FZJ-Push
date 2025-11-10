@@ -57,11 +57,12 @@ def visualize_frame(frame):
     ax.set_ylim(mid[1] - max_range, mid[1] + max_range)
     ax.set_zlim(mid[2] - max_range, mid[2] + max_range)
     # ✅ 視点を調整（elev = 上下角度, azim = 水平角度）
-    elev= 18
+    elev= 16
     azim = -10
     ax.view_init(elev=elev, azim=azim)  # ←ここを変えると視点が変わる！
 
-    plt.savefig(f'./elev-{elev}-azim-{azim}.png', dpi=300)
+    os.makedirs('visual_results', exist_ok=True)
+    plt.savefig(os.path.join('visual_results', f'elev-{elev}-azim-{azim}.png'), dpi=300)
     plt.show()
 
 if __name__=='__main__':
